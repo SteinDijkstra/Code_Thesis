@@ -1,0 +1,61 @@
+# This file is a guide of how the configurations should be specified, it can help during experimentation and it makes tracking experiments easier
+
+inputlayer: # specify the input of the network
+  number_input: 1 # size of the input; is equal to 1 for the regression problem, will be larger for timeseries approaches
+
+layers:
+- nodes: 64
+  activation: "relu"
+  kernel_size: 5
+- nodes: 64
+  activation: "relu"
+  kernel_size: 5
+- nodes: 32
+  activation: "relu"
+  kernel_size: 5
+
+outputlayer:
+  number_output: 1
+  type_output: "real"
+
+
+compilation:
+  loss_function: "mse"
+  optimizer: "adam"
+
+
+training:
+  batch_size: 32
+  epochs: 100
+  use_callback: False
+
+pedestrian:
+  lookback: 8
+  forward: 12
+  nodes: 128
+  activation: "relu"
+
+outputoptions:
+  save_output: True
+  output_location: "./results"
+
+variant:
+  dropoutrate: 0.2
+  tau: 1
+  r: 1
+  n_draws: 100
+  n_ensemble: 10
+  max_layers: 6
+  min_nodes: 16
+  max_nodes: 128
+  activation_functions: 
+    - "sigmoid"
+    - "relu"
+  batchsizes: 
+    - 16
+    - 32
+    - 64
+    - 128
+  optimizers:
+    - "adam"
+
